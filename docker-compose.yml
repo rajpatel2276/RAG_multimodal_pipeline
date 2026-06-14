@@ -1,0 +1,38 @@
+services:
+  # Local Qdrant Vector Database
+  qdrant_db:
+    image: docker.io/qdrant/qdrant:latest
+    container_name: qdrant_vector_db
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage
+
+  # FastAPI Backend Service
+  backend:
+    build:
+      context: .
+      dockerfile: app/backend.Dockerfile
+    container_name: fastapi_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - QDRANT_PATH=http://qdrant_db:6333
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    depends_on:
+      - qdrant_db
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  # Streamlit Frontend Service
+  frontend:
+    build:
+      context: .
+      dockerfile: app/frontend.Dockerfile
+    container_name: streamlit_frontend
+    ports:
+      - "8501:8501"
+    environment:
+      - FASTAPI_URL=http://backend:8000/query
+    depends_on:
+      - backend

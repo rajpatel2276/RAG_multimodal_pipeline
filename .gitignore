@@ -1,0 +1,10 @@
+# Environments
+rag_env/
+__pycache__/
+*.pyc
+
+# Database Volume
+qdrant_storage/
+
+# OS Files
+.DS_Store
