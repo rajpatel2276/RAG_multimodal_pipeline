@@ -30,7 +30,7 @@ To prevent vector poisoning, data must be strictly segregated:
 
 ## 🚀 Quick Start Guide
 
-### 1. Environment Setup
+1. Environment Setup
 Clone the repository and set up your Python environment for data ingestion:
 ```bash
 git clone [https://github.com/rajpatel2276/RAG_multimodal_pipeline.git](https://github.com/rajpatel2276/RAG_multimodal_pipeline.git)
@@ -40,7 +40,7 @@ source rag_env/bin/activate
 pip install -r requirements.txt
 
 
-Boot the Vector Database
+2.Boot the Vector Database
 Start the container cluster in the background. The backend and frontend will wait for Qdrant to initialize.
 
 Bash
